@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Untitled</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' https: data: https://i.imgur.com; media-src 'self' https: https://raw.githubusercontent.com; connect-src 'self' https:;">
+    <title>生日祝福</title>
+</head>
+<body>
+    <!-- 表單容器 -->
+    <div class="form-container" id="formContainer" role="form">
+        <h1 class="birthday-title">Happy Birthday</h1>
+        <h2 class="subtitle">to you</h2>
+        <form onsubmit="showWishes(event);">
+            <div class="form-group">
+                <input type="text" 
+                       id="name" 
+                       placeholder="請輸入您的名字" 
+                       required
+                       aria-label="名字輸入">
+            </div>
+            <div class="form-group">
+                <input type="text" 
+                       id="birthday" 
+                       placeholder="請輸入生日 (MM-DD)" 
+                       pattern="(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])" 
+                       title="請輸入有效的月份和日期 (MM-DD)" 
+                       required
+                       aria-label="生日輸入">
+            </div>
+            <button type="submit" class="submit-btn">送出</button>
+        </form>
+    </div>
+
+    <!-- 氣球容器 -->
+    <div class="balloons-container" id="balloonsContainer" aria-hidden="true">
+        <!-- 氣球將由JavaScript動態生成 -->
+    </div>
+
+    <!-- 漂浮圖片容器 -->
+    <div class="floating-images" id="floatingImages" aria-hidden="true">
+        <img src="https://i.imgur.com/ADlgsmZ.jpeg" 
+             class="float-photo small" 
+             alt="生日照片1"
+             loading="lazy"
+             style="top: 1%; left: 15%;">
+        <img src="https://i.imgur.com/QyDmpFF.jpeg" 
+             class="float-photo large" 
+             alt="生日照片2"
+             loading="lazy"
+             style="top: 40%; left: 75%;">
+        <img src="https://i.imgur.com/iAQzGzJ.jpeg" 
+             class="float-photo medium" 
+             alt="生日照片3"
+             loading="lazy"
+             style="top: 35%; left: 20%;">
+        <img src="https://i.imgur.com/ZN0fp2W.jpeg" 
+             class="float-photo small" 
+             alt="生日照片4"
+             loading="lazy"
+             style="top: 25%; left: 65%;">
+        <img src="https://i.imgur.com/uyzuKQk.jpeg" 
+             class="float-photo large" 
+             alt="生日照片5"
+             loading="lazy"
+             style="top: 75%; left: 65%;">
+        <img src="https://i.imgur.com/tIETYjX.jpeg" 
+             class="float-photo medium" 
+             alt="生日照片6"
+             loading="lazy"
+             style="top: 55%; left: 5%;">
+    </div>
+
+    <!-- 祝福容器 -->
+    <div class="wishes-container" id="wishesContainer">
+        <!-- 蛋糕部分 -->
+        <div class="cake-container" id="cakeContainer" role="button" tabindex="0">
+            <div class="cake" aria-label="生日蛋糕"></div>
+            <div class="candle" aria-hidden="true"></div>
+            <div class="flame" aria-hidden="true"></div>
+        </div>
+        
+        <!-- 許願提示文字 -->
+        <div class="wish-prompt" id="wishPrompt" role="alert">點蛋糕許願囉</div>
+        
+        <!-- 許願計時器 -->
+        <div class="wish-timer" id="wishTimer" role="timer" aria-live="polite"></div>
+        
+        <!-- 祝福訊息 -->
+        <div class="wishes-list">
+            <div class="wish" id="wish1" role="article"></div>
+            <div class="wish" id="wish2" role="article"></div>
+            <div class="wish" id="wish3" role="article"></div>
+            <div class="wish" id="wish4" role="article"></div>
+            <div class="wish" id="wish5" role="article"></div>
+            <div class="wish" id="wish6" role="article"></div>
+            <div class="wish" id="wish7" role="article"></div>
+        </div>
+    </div>
+
+    <!-- 最終圖片 -->
+    <img id="finalImage" 
+         class="final-image" 
+         src="https://i.imgur.com/ixnhdXy.jpeg" 
+         alt="最終祝福圖片"
+         loading="lazy">
+
+    <!-- 音樂控制 -->
+    <button class="music-control" 
+            id="musicControl" 
+            aria-label="音樂控制"
+            aria-pressed="false">
+        🔇
+    </button>
+
+    <!-- 音樂 -->
+    <audio id="bgMusic" loop preload="auto" autoplay crossorigin="anonymous">
+    <source src="https://raw.githubusercontent.com/vcvc87921/birthday-music/main/scott%E7%94%9F%E6%97%A5.MP3" 
+            type="audio/mp3">
+    <p>您的瀏覽器不支持音頻播放。</p>
+</audio>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

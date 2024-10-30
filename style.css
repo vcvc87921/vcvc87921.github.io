@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffe8e8, #fff3e0);
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 2rem;
+    text-align: center;
+    z-index: 100;
+}
+
+.birthday-title {
+    color: #ff6b6b;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 2rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    color: #5c7cfa;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin: 1rem 0;
+}
+
+input {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.8rem;
+    width: 300px;
+    border: 2px solid #ffc0cb;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff69b4;
+    box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+}
+
+button {
+    background: #ff69b4;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    will-change: transform;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #ff4da6;
+}
+
+.wishes-container {
+    position: relative;
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.cake-container {
+    display: none;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin: 2rem auto;
+    width: 200px;
+    height: 200px;
+    will-change: transform;
+}
+
+.cake-container.enlarged {
+    transform: scale(1.5);
+}
+
+.cake {
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/LG4tESs.png') center/cover no-repeat;
+    position: relative;
+    border-radius: 10px;
+}
+
+.cake-container:hover {
+    transform: scale(1.1);
+}
+
+.candle {
+    display: none;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.flame {
+    display: none;
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(#ffeb3b, #ff9800);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 0.5s infinite alternate;
+    box-shadow: 0 0 10px #ff9800;
+    will-change: transform;
+}
+
+.wish-prompt {
+    display: none;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.wish-timer {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    transition: all 0.5s ease;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wish-timer.top-position {
+    top: 5px;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.wish {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    margin: 1rem auto;
+    min-height: 100px;
+    max-width: 600px;
+    border-radius: 15px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #444;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    will-change: opacity, transform;
+}
+
+.wish.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wishes-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/ixnhdXy.jpeg') center/cover no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+    transition: opacity 1s ease;
+}
+
+.final-image {
+    display: none;
+    max-width: 80%;
+    margin: 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 0.8rem;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+}
+
+.balloons-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.floating-images {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 100;
+    display: none;
+}
+
+.float-photo {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: float 5s ease-in-out infinite, fadeIn 2s forwards;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    will-change: transform;
+}
+
+.float-photo.small {
+    width: 100px;
+    height: 100px;
+}
+
+.float-photo.medium {
+    width: 150px;
+    height: 150px;
+}
+
+.float-photo.large {
+    width: 200px;
+    height: 200px;
+}
+
+.balloon {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background: #ff69b4;
+    border-radius: 50%;
+    animation: float-up 5s linear infinite;
+    bottom: -40px;
+    will-change: transform;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, -100vh, 0) rotate(-20deg);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes flicker {
+    0% { transform: translate3d(-50%, 0, 0) scale(1); }
+    100% { transform: translate3d(-50%, 0, 0) scale(1.2); }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .birthday-title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    input {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .cake-container.enlarged {
+        transform: scale(1.2);
+    }
+
+    .wish {
+        font-size: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* 提高可訪問性 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
